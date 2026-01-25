@@ -13,7 +13,7 @@ export function ReadingOrb({ item, index, totalItems }: ReadingOrbProps) {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const animationRef = useRef<number>();
   
-  // Wave-based motion synced with background lattice pace
+  // Free-roaming motion across the quantum field
   useEffect(() => {
     let time = Math.random() * 100; // Random start phase
     
@@ -21,23 +21,36 @@ export function ReadingOrb({ item, index, totalItems }: ReadingOrbProps) {
     const seedA = Math.random() * Math.PI * 2;
     const seedB = Math.random() * Math.PI * 2;
     const seedC = Math.random() * Math.PI * 2;
+    const seedD = Math.random() * Math.PI * 2;
     const freqVariance = 0.7 + Math.random() * 0.6; // 0.7-1.3 multiplier
-    const ampX = 10 + Math.random() * 12; // 10-22px amplitude
-    const ampY = 8 + Math.random() * 10;  // 8-18px amplitude
+    
+    // Large-scale drift parameters (roaming across the field)
+    const driftAmpX = 80 + Math.random() * 120; // 80-200px drift range
+    const driftAmpY = 60 + Math.random() * 100; // 60-160px drift range
+    const driftFreqX = 0.02 + Math.random() * 0.03; // Very slow drift
+    const driftFreqY = 0.015 + Math.random() * 0.025;
+    
+    // Small-scale oscillation (local jitter)
+    const jitterAmpX = 8 + Math.random() * 10;
+    const jitterAmpY = 6 + Math.random() * 8;
     
     const animate = () => {
       // Match the background wave timing (time += 0.015)
       time += 0.015;
       
-      // Multi-layered waves with per-orb randomness
-      const waveX = Math.sin(time * 0.6 * freqVariance + seedA + index * 0.8) * ampX + 
-                    Math.sin(time * 0.35 * freqVariance + seedB + index * 1.2) * (ampX * 0.5) +
-                    Math.sin(time * 0.9 + seedC + index * 0.5) * (ampX * 0.3);
-      const waveY = Math.cos(time * 0.5 * freqVariance + seedA + index * 0.9) * ampY + 
-                    Math.cos(time * 0.25 * freqVariance + seedB + index * 1.5) * (ampY * 0.5) +
-                    Math.cos(time * 0.7 + seedC + index * 0.7) * (ampY * 0.35);
+      // Large slow drift across the space (roaming)
+      const driftX = Math.sin(time * driftFreqX * freqVariance + seedA) * driftAmpX +
+                     Math.cos(time * driftFreqX * 0.7 + seedB) * (driftAmpX * 0.5);
+      const driftY = Math.cos(time * driftFreqY * freqVariance + seedC) * driftAmpY +
+                     Math.sin(time * driftFreqY * 0.6 + seedD) * (driftAmpY * 0.4);
       
-      setOffset({ x: waveX, y: waveY });
+      // Small rapid oscillation layered on top
+      const jitterX = Math.sin(time * 0.8 + seedA + index * 0.5) * jitterAmpX +
+                      Math.sin(time * 1.2 + seedB) * (jitterAmpX * 0.4);
+      const jitterY = Math.cos(time * 0.7 + seedC + index * 0.6) * jitterAmpY +
+                      Math.cos(time * 1.1 + seedD) * (jitterAmpY * 0.35);
+      
+      setOffset({ x: driftX + jitterX, y: driftY + jitterY });
       
       animationRef.current = requestAnimationFrame(animate);
     };

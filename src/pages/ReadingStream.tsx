@@ -13,8 +13,8 @@ export default function ReadingStreamPage() {
       description="A curated collection of books, essays, and ideas that have shaped my thinking."
     >
       <div className="min-h-screen relative overflow-hidden">
-        {/* Quantum field background */}
-        <QuantumField />
+        {/* Quantum field background (never intercept clicks) */}
+        <QuantumField className="pointer-events-none" />
         
         {/* Header overlay */}
         <header className="relative z-20 pt-16 pb-8 text-center">

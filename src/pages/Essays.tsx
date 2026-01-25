@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom';
-import { Calendar, ArrowRight } from 'lucide-react';
+import { Calendar, Clock } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { useEssays, useCategories } from '@/hooks/useEssays';
 import { Button } from '@/components/ui/button';
 import { format } from 'date-fns';
 import { useState } from 'react';
-import { cn } from '@/lib/utils';
+
+// Default placeholder for essays without images
+const defaultEssayImage = '/placeholder.svg';
 
 export default function EssaysPage() {
   const { data: essays, isLoading } = useEssays();
@@ -15,6 +17,13 @@ export default function EssaysPage() {
   const filteredEssays = selectedCategory
     ? essays?.filter((essay) => essay.category?.slug === selectedCategory)
     : essays;
+
+  // Estimate reading time based on content length (roughly 200 words per minute)
+  const getReadingTime = (content: string) => {
+    const wordCount = content?.split(/\s+/).length || 0;
+    const minutes = Math.max(1, Math.ceil(wordCount / 200));
+    return `${minutes} min read`;
+  };
 
   return (
     <Layout
@@ -59,73 +68,70 @@ export default function EssaysPage() {
           )}
 
           {/* Essays Grid */}
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             {isLoading ? (
-              <div className="space-y-12">
-                {[1, 2, 3].map((i) => (
-                  <div key={i} className="animate-pulse space-y-4">
-                    <div className="h-4 bg-muted rounded w-32" />
-                    <div className="h-8 bg-muted rounded w-3/4" />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="animate-pulse">
+                    <div className="aspect-[3/2] bg-muted rounded-lg mb-4" />
+                    <div className="h-4 bg-muted rounded w-24 mb-3" />
+                    <div className="h-6 bg-muted rounded w-3/4 mb-2" />
                     <div className="h-16 bg-muted rounded" />
                   </div>
                 ))}
               </div>
             ) : filteredEssays && filteredEssays.length > 0 ? (
-              <div className="space-y-16">
-                {filteredEssays.map((essay, index) => (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+                {filteredEssays.map((essay) => (
                   <article 
                     key={essay.id}
-                    className={cn(
-                      'group pb-16',
-                      index !== filteredEssays.length - 1 && 'border-b border-border'
-                    )}
+                    className="group bg-card border border-border rounded-lg overflow-hidden hover:shadow-elegant transition-all duration-300"
                   >
-                    {/* Category & Date */}
-                    <div className="flex items-center gap-4 mb-4 text-sm text-muted-foreground">
-                      {essay.category && (
-                        <>
-                          <button
-                            onClick={() => setSelectedCategory(essay.category!.slug)}
-                            className="font-body uppercase tracking-widest hover:text-primary transition-colors"
-                          >
-                            {essay.category.name}
-                          </button>
-                          <span>·</span>
-                        </>
-                      )}
-                      {essay.published_at && (
-                        <time className="font-body flex items-center gap-2">
-                          <Calendar className="h-3.5 w-3.5" />
-                          {format(new Date(essay.published_at), 'MMMM d, yyyy')}
-                        </time>
+                    {/* Featured Image */}
+                    <Link to={`/essays/${essay.slug}`} className="block overflow-hidden">
+                      <div className="aspect-[3/2] overflow-hidden">
+                        <img
+                          src={essay.featured_image || defaultEssayImage}
+                          alt={essay.title}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                      </div>
+                    </Link>
+
+                    {/* Content */}
+                    <div className="p-6">
+                      {/* Metadata: Date & Read Time */}
+                      <div className="flex items-center gap-3 mb-3 text-sm text-muted-foreground">
+                        {essay.published_at && (
+                          <time className="font-body flex items-center gap-1.5">
+                            <Calendar className="h-3.5 w-3.5" />
+                            {format(new Date(essay.published_at), 'MMM d, yyyy')}
+                          </time>
+                        )}
+                        <span className="text-border">·</span>
+                        <span className="font-body flex items-center gap-1.5">
+                          <Clock className="h-3.5 w-3.5" />
+                          {getReadingTime(essay.content)}
+                        </span>
+                      </div>
+
+                      {/* Title */}
+                      <h2 className="font-display text-xl md:text-2xl font-semibold text-foreground mb-3 leading-tight line-clamp-2">
+                        <Link
+                          to={`/essays/${essay.slug}`}
+                          className="hover:text-primary transition-colors"
+                        >
+                          {essay.title}
+                        </Link>
+                      </h2>
+
+                      {/* Excerpt */}
+                      {essay.excerpt && (
+                        <p className="font-body text-muted-foreground leading-relaxed line-clamp-3">
+                          {essay.excerpt}
+                        </p>
                       )}
                     </div>
-
-                    {/* Title */}
-                    <h2 className="font-display text-2xl md:text-3xl font-semibold text-foreground mb-4 leading-tight">
-                      <Link
-                        to={`/essays/${essay.slug}`}
-                        className="hover:text-primary transition-colors"
-                      >
-                        {essay.title}
-                      </Link>
-                    </h2>
-
-                    {/* Excerpt */}
-                    {essay.excerpt && (
-                      <p className="font-body text-lg text-muted-foreground leading-relaxed mb-6">
-                        {essay.excerpt}
-                      </p>
-                    )}
-
-                    {/* Read More */}
-                    <Link
-                      to={`/essays/${essay.slug}`}
-                      className="inline-flex items-center font-body text-sm uppercase tracking-widest text-primary hover:text-accent transition-colors group/link"
-                    >
-                      Read Essay
-                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/link:translate-x-1" />
-                    </Link>
                   </article>
                 ))}
               </div>

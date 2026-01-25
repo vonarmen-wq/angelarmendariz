@@ -51,19 +51,19 @@ export function BioSection() {
 
             {/* Location with animated rocket */}
             <div className="flex items-center gap-3 pt-2">
-              <MapPin className="h-4 w-4 text-accent" />
-              <span className="font-body text-sm text-muted-foreground">
+              <MapPin className="h-5 w-5 text-accent" />
+              <span className="font-body text-base text-muted-foreground">
                 Boston, MA
               </span>
               <div className="relative ml-1">
                 <Rocket 
-                  className="h-5 w-5 text-accent animate-rocket-launch" 
+                  className="h-6 w-6 text-accent animate-rocket-launch" 
                   style={{ 
                     filter: 'drop-shadow(0 0 4px hsl(42, 65%, 55%))',
                   }}
                 />
                 {/* Flame/trail effect */}
-                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-3 bg-gradient-to-t from-transparent via-accent/60 to-accent rounded-full animate-flame opacity-80" />
+                <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2 h-4 bg-gradient-to-t from-transparent via-accent/60 to-accent rounded-full animate-flame opacity-80" />
               </div>
             </div>
 

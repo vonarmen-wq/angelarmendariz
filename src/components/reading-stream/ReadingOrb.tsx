@@ -17,15 +17,25 @@ export function ReadingOrb({ item, index, totalItems }: ReadingOrbProps) {
   useEffect(() => {
     let time = Math.random() * 100; // Random start phase
     
+    // Unique random seeds per orb for organic variation
+    const seedA = Math.random() * Math.PI * 2;
+    const seedB = Math.random() * Math.PI * 2;
+    const seedC = Math.random() * Math.PI * 2;
+    const freqVariance = 0.7 + Math.random() * 0.6; // 0.7-1.3 multiplier
+    const ampX = 10 + Math.random() * 12; // 10-22px amplitude
+    const ampY = 8 + Math.random() * 10;  // 8-18px amplitude
+    
     const animate = () => {
       // Match the background wave timing (time += 0.015)
       time += 0.015;
       
-      // Use similar wave frequencies as background (0.3-0.8 range)
-      const waveX = Math.sin(time * 0.6 + index * 0.8) * 12 + 
-                    Math.sin(time * 0.35 + index * 1.2) * 8;
-      const waveY = Math.cos(time * 0.5 + index * 0.9) * 10 + 
-                    Math.cos(time * 0.25 + index * 1.5) * 6;
+      // Multi-layered waves with per-orb randomness
+      const waveX = Math.sin(time * 0.6 * freqVariance + seedA + index * 0.8) * ampX + 
+                    Math.sin(time * 0.35 * freqVariance + seedB + index * 1.2) * (ampX * 0.5) +
+                    Math.sin(time * 0.9 + seedC + index * 0.5) * (ampX * 0.3);
+      const waveY = Math.cos(time * 0.5 * freqVariance + seedA + index * 0.9) * ampY + 
+                    Math.cos(time * 0.25 * freqVariance + seedB + index * 1.5) * (ampY * 0.5) +
+                    Math.cos(time * 0.7 + seedC + index * 0.7) * (ampY * 0.35);
       
       setOffset({ x: waveX, y: waveY });
       

@@ -40,6 +40,9 @@ export function ReadingOrb({ item, index, totalItems }: ReadingOrbProps) {
   // Animation delay based on index for staggered floating
   const animationDelay = (index * 0.3) % 5;
   
+  // Alternate between gold and cream orbs for variety
+  const isGoldOrb = index % 3 === 0;
+  
   return (
     <div
       className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all duration-500 ease-out"
@@ -54,23 +57,31 @@ export function ReadingOrb({ item, index, totalItems }: ReadingOrbProps) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Orb glow effect */}
+      {/* Orb with Renaissance aesthetic */}
       <div
         className="absolute inset-0 rounded-full transition-all duration-500"
         style={{
-          background: `radial-gradient(circle at 30% 30%, 
-            hsla(200, 80%, 85%, ${isHovered ? 0.95 : 0.8}) 0%, 
-            hsla(220, 70%, 70%, ${isHovered ? 0.85 : 0.6}) 30%, 
-            hsla(260, 60%, 55%, ${isHovered ? 0.7 : 0.4}) 70%, 
-            hsla(280, 50%, 40%, ${isHovered ? 0.5 : 0.2}) 100%)`,
+          background: isGoldOrb
+            ? `radial-gradient(circle at 30% 30%, 
+                hsl(45, 70%, 75%) 0%, 
+                hsl(42, 65%, 55%) 40%, 
+                hsl(38, 55%, 40%) 70%, 
+                hsl(35, 45%, 30%) 100%)`
+            : `radial-gradient(circle at 30% 30%, 
+                hsl(40, 35%, 92%) 0%, 
+                hsl(38, 30%, 80%) 40%, 
+                hsl(35, 25%, 65%) 70%, 
+                hsl(30, 20%, 50%) 100%)`,
           boxShadow: isHovered 
-            ? '0 0 60px hsla(220, 80%, 70%, 0.6), 0 0 120px hsla(260, 70%, 60%, 0.3), inset 0 0 30px hsla(200, 80%, 90%, 0.3)'
-            : '0 0 30px hsla(220, 70%, 60%, 0.3), 0 0 60px hsla(260, 60%, 50%, 0.15)',
-          transform: isHovered ? 'scale(1)' : 'scale(1)',
+            ? `0 0 50px hsla(42, 65%, 55%, 0.5), 
+               0 0 100px hsla(42, 55%, 45%, 0.25), 
+               inset 0 0 25px hsla(45, 60%, 85%, 0.4)`
+            : `0 0 25px hsla(42, 65%, 55%, 0.25), 
+               0 0 50px hsla(42, 55%, 45%, 0.1)`,
         }}
       />
       
-      {/* Orb content */}
+      {/* Orb content - visible on hover */}
       <div 
         className={`absolute inset-0 flex flex-col items-center justify-center p-4 text-center transition-all duration-500 ${
           isHovered ? 'opacity-100' : 'opacity-0'
@@ -78,14 +89,14 @@ export function ReadingOrb({ item, index, totalItems }: ReadingOrbProps) {
       >
         <h3 
           className="font-display text-sm font-semibold leading-tight mb-1"
-          style={{ color: 'hsl(250, 30%, 15%)' }}
+          style={{ color: 'hsl(25, 40%, 15%)' }}
         >
           {item.title}
         </h3>
         {item.author && (
           <p 
-            className="text-xs mb-2"
-            style={{ color: 'hsl(260, 25%, 30%)' }}
+            className="font-body text-xs italic mb-2"
+            style={{ color: 'hsl(25, 30%, 30%)' }}
           >
             {item.author}
           </p>
@@ -95,10 +106,10 @@ export function ReadingOrb({ item, index, totalItems }: ReadingOrbProps) {
             href={item.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-xs font-medium px-3 py-1.5 rounded-full transition-all hover:scale-105"
+            className="inline-flex items-center gap-1 text-xs font-display font-medium px-3 py-1.5 rounded-full transition-all hover:scale-105"
             style={{ 
-              background: 'hsla(260, 50%, 25%, 0.9)',
-              color: 'hsl(200, 80%, 90%)',
+              background: 'hsl(350, 45%, 30%)',
+              color: 'hsl(40, 30%, 96%)',
             }}
             onClick={(e) => e.stopPropagation()}
           >
@@ -115,7 +126,7 @@ export function ReadingOrb({ item, index, totalItems }: ReadingOrbProps) {
       >
         <span 
           className="font-display text-xs font-medium text-center leading-tight line-clamp-2"
-          style={{ color: 'hsl(250, 25%, 20%)' }}
+          style={{ color: 'hsl(25, 40%, 15%)' }}
         >
           {item.title.length > 30 ? item.title.substring(0, 27) + '...' : item.title}
         </span>

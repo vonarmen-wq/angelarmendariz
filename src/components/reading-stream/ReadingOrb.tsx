@@ -15,29 +15,29 @@ export function ReadingOrb({ item, index, totalItems }: ReadingOrbProps) {
   const velocityRef = useRef({ x: 0, y: 0 });
   const targetRef = useRef({ x: 0, y: 0 });
   
-  // Brownian motion - random molecular movement
+  // Brownian motion - slow, gentle molecular movement
   useEffect(() => {
     const updateTarget = () => {
-      // Random target within a radius
-      const radius = 25;
+      // Small radius for subtle movement
+      const radius = 12;
       targetRef.current = {
         x: (Math.random() - 0.5) * radius * 2,
         y: (Math.random() - 0.5) * radius * 2,
       };
     };
     
-    // Change target periodically
+    // Change target slowly
     updateTarget();
-    const targetInterval = setInterval(updateTarget, 2000 + Math.random() * 2000);
+    const targetInterval = setInterval(updateTarget, 4000 + Math.random() * 3000);
     
     const animate = () => {
-      // Smooth interpolation toward target with some randomness
-      const spring = 0.02 + Math.random() * 0.01;
-      const damping = 0.95;
+      // Very slow, gentle movement
+      const spring = 0.005;
+      const damping = 0.98;
       
-      // Add small random impulses (Brownian motion)
-      const impulseX = (Math.random() - 0.5) * 0.5;
-      const impulseY = (Math.random() - 0.5) * 0.5;
+      // Tiny random impulses
+      const impulseX = (Math.random() - 0.5) * 0.08;
+      const impulseY = (Math.random() - 0.5) * 0.08;
       
       velocityRef.current.x += (targetRef.current.x - offset.x) * spring + impulseX;
       velocityRef.current.y += (targetRef.current.y - offset.y) * spring + impulseY;
@@ -45,9 +45,11 @@ export function ReadingOrb({ item, index, totalItems }: ReadingOrbProps) {
       velocityRef.current.x *= damping;
       velocityRef.current.y *= damping;
       
+      // Clamp offset to keep orbs visible (max 15px drift)
+      const maxDrift = 15;
       setOffset(prev => ({
-        x: prev.x + velocityRef.current.x,
-        y: prev.y + velocityRef.current.y,
+        x: Math.max(-maxDrift, Math.min(maxDrift, prev.x + velocityRef.current.x)),
+        y: Math.max(-maxDrift, Math.min(maxDrift, prev.y + velocityRef.current.y)),
       }));
       
       animationRef.current = requestAnimationFrame(animate);

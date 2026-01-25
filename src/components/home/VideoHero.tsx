@@ -24,7 +24,7 @@ export function VideoHero() {
       <div className="relative z-10 container mx-auto px-6 text-center flex flex-col justify-end pb-16 md:pb-24 min-h-screen">
         <div className="max-w-3xl mx-auto space-y-6 animate-fade-in">
           {/* Name */}
-          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-foreground tracking-tight">
+          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-foreground tracking-tight">
             {settings?.site_name || 'Angel Armendariz'}
           </h1>
 

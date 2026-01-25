@@ -26,10 +26,6 @@ export default function AboutPage() {
                 className="w-40 h-40 md:w-48 md:h-48 rounded-full mx-auto object-cover border-4 border-accent/20 shadow-lg"
               />
             </div>
-            
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold text-foreground mb-6">
-              About
-            </h1>
             <div className="flex justify-center gap-6">
               {settings?.linkedin_url && (
                 <a

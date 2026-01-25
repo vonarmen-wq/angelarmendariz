@@ -137,7 +137,11 @@ export function ReadingOrb({ item, index, totalItems }: ReadingOrbProps) {
               background: 'hsl(350, 45%, 30%)',
               color: 'hsl(40, 30%, 96%)',
             }}
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => {
+              e.stopPropagation();
+              // Some browsers/previews can be picky about target=_blank; force open on user gesture.
+              window.open(item.url!, '_blank', 'noopener,noreferrer');
+            }}
           >
             Read <ExternalLink className="h-3 w-3" />
           </a>

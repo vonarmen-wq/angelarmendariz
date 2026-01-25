@@ -3,6 +3,7 @@ import { useSiteSettings, useMediaMentions } from '@/hooks/useSiteSettings';
 import { Linkedin, Twitter, ExternalLink } from 'lucide-react';
 import { SubstackCTA } from '@/components/home/SubstackCTA';
 import { format } from 'date-fns';
+import profilePhoto from '@/assets/profile-photo.jpeg';
 
 export default function AboutPage() {
   const { data: settings } = useSiteSettings();
@@ -15,8 +16,17 @@ export default function AboutPage() {
     >
       <div className="min-h-screen py-12 md:py-20">
         <div className="container mx-auto px-6">
-          {/* Header */}
+          {/* Header with Photo */}
           <header className="max-w-3xl mx-auto text-center mb-16">
+            {/* Profile Photo */}
+            <div className="mb-8">
+              <img
+                src={profilePhoto}
+                alt="Angel Armendariz"
+                className="w-40 h-40 md:w-48 md:h-48 rounded-full mx-auto object-cover border-4 border-accent/20 shadow-lg"
+              />
+            </div>
+            
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold text-foreground mb-6">
               About
             </h1>

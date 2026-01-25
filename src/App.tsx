@@ -8,6 +8,7 @@ import Essays from "./pages/Essays";
 import Essay from "./pages/Essay";
 import About from "./pages/About";
 import Portfolio from "./pages/Portfolio";
+import ReadingStream from "./pages/ReadingStream";
 import Auth from "./pages/Auth";
 import AdminDashboard from "./pages/admin/Dashboard";
 import EssayEditor from "./pages/admin/EssayEditor";
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/essays/:slug" element={<Essay />} />
           <Route path="/about" element={<About />} />
           <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/reading-stream" element={<ReadingStream />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/essays/:id" element={<EssayEditor />} />

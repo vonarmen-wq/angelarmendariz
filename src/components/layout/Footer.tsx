@@ -29,6 +29,9 @@ export function Footer() {
               <Link to="/essays" className="font-body text-sm text-foreground hover:text-primary transition-colors">
                 Essays
               </Link>
+              <Link to="/reading-stream" className="font-body text-sm text-foreground hover:text-primary transition-colors">
+                Reading Stream
+              </Link>
               <Link to="/about" className="font-body text-sm text-foreground hover:text-primary transition-colors">
                 About
               </Link>

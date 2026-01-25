@@ -166,6 +166,39 @@ export type Database = {
         }
         Relationships: []
       }
+      reading_items: {
+        Row: {
+          author: string | null
+          created_at: string
+          description: string | null
+          display_order: number | null
+          id: string
+          source: string | null
+          title: string
+          url: string | null
+        }
+        Insert: {
+          author?: string | null
+          created_at?: string
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          source?: string | null
+          title: string
+          url?: string | null
+        }
+        Update: {
+          author?: string | null
+          created_at?: string
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          source?: string | null
+          title?: string
+          url?: string | null
+        }
+        Relationships: []
+      }
       site_settings: {
         Row: {
           about_content: string | null

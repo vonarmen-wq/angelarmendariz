@@ -6,7 +6,7 @@
    Inspired by illuminated manuscripts, warm earth tones, and classical typography
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@400;500;600;700&display=swap');
 
 @layer base {
   :root {
@@ -68,9 +68,9 @@
     --ivory: 45 30% 97%;
 
     /* Typography */
-    --font-display: 'Playfair Display', Georgia, serif;
+    --font-display: 'Montserrat', sans-serif;
     --font-body: 'EB Garamond', 'Times New Roman', serif;
-    --font-accent: 'Cormorant Garamond', Georgia, serif;
+    --font-accent: 'EB Garamond', 'Times New Roman', serif;
 
     /* Gradients */
     --gradient-parchment: linear-gradient(180deg, hsl(40 30% 96%) 0%, hsl(38 35% 92%) 100%);

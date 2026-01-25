@@ -14,9 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['Playfair Display', 'Georgia', 'serif'],
+        display: ['Montserrat', 'sans-serif'],
         body: ['EB Garamond', 'Times New Roman', 'serif'],
-        accent: ['Cormorant Garamond', 'Georgia', 'serif'],
+        accent: ['EB Garamond', 'Times New Roman', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",

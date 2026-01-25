@@ -15,42 +15,21 @@ export function ReadingOrb({ item, index, totalItems }: ReadingOrbProps) {
   const velocityRef = useRef({ x: 0, y: 0 });
   const targetRef = useRef({ x: 0, y: 0 });
   
-  // Brownian motion - slow, gentle molecular movement
+  // Brownian motion - synced with background lattice pace
   useEffect(() => {
-    const updateTarget = () => {
-      // Small radius for subtle movement
-      const radius = 12;
-      targetRef.current = {
-        x: (Math.random() - 0.5) * radius * 2,
-        y: (Math.random() - 0.5) * radius * 2,
-      };
-    };
-    
-    // Change target slowly
-    updateTarget();
-    const targetInterval = setInterval(updateTarget, 4000 + Math.random() * 3000);
+    let time = Math.random() * 100; // Random start phase
     
     const animate = () => {
-      // Very slow, gentle movement
-      const spring = 0.005;
-      const damping = 0.98;
+      // Match the background wave timing (time += 0.015)
+      time += 0.015;
       
-      // Tiny random impulses
-      const impulseX = (Math.random() - 0.5) * 0.08;
-      const impulseY = (Math.random() - 0.5) * 0.08;
+      // Use similar wave frequencies as background (0.3-0.8 range)
+      const waveX = Math.sin(time * 0.6 + index * 0.8) * 12 + 
+                    Math.sin(time * 0.35 + index * 1.2) * 8;
+      const waveY = Math.cos(time * 0.5 + index * 0.9) * 10 + 
+                    Math.cos(time * 0.25 + index * 1.5) * 6;
       
-      velocityRef.current.x += (targetRef.current.x - offset.x) * spring + impulseX;
-      velocityRef.current.y += (targetRef.current.y - offset.y) * spring + impulseY;
-      
-      velocityRef.current.x *= damping;
-      velocityRef.current.y *= damping;
-      
-      // Clamp offset to keep orbs visible (max 15px drift)
-      const maxDrift = 15;
-      setOffset(prev => ({
-        x: Math.max(-maxDrift, Math.min(maxDrift, prev.x + velocityRef.current.x)),
-        y: Math.max(-maxDrift, Math.min(maxDrift, prev.y + velocityRef.current.y)),
-      }));
+      setOffset({ x: waveX, y: waveY });
       
       animationRef.current = requestAnimationFrame(animate);
     };
@@ -58,12 +37,11 @@ export function ReadingOrb({ item, index, totalItems }: ReadingOrbProps) {
     animationRef.current = requestAnimationFrame(animate);
     
     return () => {
-      clearInterval(targetInterval);
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, []);
+  }, [index]);
   
   // Calculate base position in a more organic scattered pattern
   const getPosition = () => {

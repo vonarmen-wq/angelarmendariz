@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ExternalLink } from 'lucide-react';
 import type { ReadingItem } from '@/hooks/useReadingItems';
 
@@ -10,8 +10,60 @@ interface ReadingOrbProps {
 
 export function ReadingOrb({ item, index, totalItems }: ReadingOrbProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const animationRef = useRef<number>();
+  const velocityRef = useRef({ x: 0, y: 0 });
+  const targetRef = useRef({ x: 0, y: 0 });
   
-  // Calculate position in a more organic scattered pattern
+  // Brownian motion - random molecular movement
+  useEffect(() => {
+    const updateTarget = () => {
+      // Random target within a radius
+      const radius = 25;
+      targetRef.current = {
+        x: (Math.random() - 0.5) * radius * 2,
+        y: (Math.random() - 0.5) * radius * 2,
+      };
+    };
+    
+    // Change target periodically
+    updateTarget();
+    const targetInterval = setInterval(updateTarget, 2000 + Math.random() * 2000);
+    
+    const animate = () => {
+      // Smooth interpolation toward target with some randomness
+      const spring = 0.02 + Math.random() * 0.01;
+      const damping = 0.95;
+      
+      // Add small random impulses (Brownian motion)
+      const impulseX = (Math.random() - 0.5) * 0.5;
+      const impulseY = (Math.random() - 0.5) * 0.5;
+      
+      velocityRef.current.x += (targetRef.current.x - offset.x) * spring + impulseX;
+      velocityRef.current.y += (targetRef.current.y - offset.y) * spring + impulseY;
+      
+      velocityRef.current.x *= damping;
+      velocityRef.current.y *= damping;
+      
+      setOffset(prev => ({
+        x: prev.x + velocityRef.current.x,
+        y: prev.y + velocityRef.current.y,
+      }));
+      
+      animationRef.current = requestAnimationFrame(animate);
+    };
+    
+    animationRef.current = requestAnimationFrame(animate);
+    
+    return () => {
+      clearInterval(targetInterval);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, []);
+  
+  // Calculate base position in a more organic scattered pattern
   const getPosition = () => {
     const cols = Math.ceil(Math.sqrt(totalItems * 1.5));
     const row = Math.floor(index / cols);
@@ -26,33 +78,29 @@ export function ReadingOrb({ item, index, totalItems }: ReadingOrbProps) {
     const offsetY = Math.cos(index * 2.3) * 6;
     
     return {
-      left: `${Math.max(10, Math.min(90, baseX + offsetX))}%`,
-      top: `${Math.max(10, Math.min(90, baseY + offsetY))}%`,
+      left: Math.max(10, Math.min(90, baseX + offsetX)),
+      top: Math.max(10, Math.min(90, baseY + offsetY)),
     };
   };
   
-  const position = getPosition();
+  const basePosition = getPosition();
   
   // Vary orb sizes slightly
   const baseSize = 100 + (index % 3) * 20;
   const size = isHovered ? baseSize * 1.8 : baseSize;
-  
-  // Animation delay based on index for staggered floating
-  const animationDelay = (index * 0.3) % 5;
   
   // Alternate between gold and cream orbs for variety
   const isGoldOrb = index % 3 === 0;
   
   return (
     <div
-      className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all duration-500 ease-out"
+      className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-[width,height,box-shadow] duration-500 ease-out"
       style={{
-        ...position,
+        left: `calc(${basePosition.left}% + ${offset.x}px)`,
+        top: `calc(${basePosition.top}% + ${offset.y}px)`,
         width: size,
         height: size,
         zIndex: isHovered ? 50 : 10 + index,
-        animation: `float ${4 + (index % 3)}s ease-in-out infinite`,
-        animationDelay: `${animationDelay}s`,
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

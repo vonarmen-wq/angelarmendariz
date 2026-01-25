@@ -84,7 +84,7 @@ export function QuantumField({ className = '' }: QuantumFieldProps) {
       ref={canvasRef}
       className={`absolute inset-0 w-full h-full ${className}`}
       style={{ 
-        background: 'linear-gradient(180deg, hsl(25 25% 10%) 0%, hsl(25 22% 14%) 50%, hsl(25 20% 12%) 100%)' 
+        background: 'radial-gradient(ellipse at 50% 100%, hsl(25 15% 8%) 0%, hsl(25 10% 4%) 50%, hsl(0 0% 2%) 100%)' 
       }}
     />
   );

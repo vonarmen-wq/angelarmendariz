@@ -32,24 +32,28 @@ export function QuantumField({ className = '' }: QuantumFieldProps) {
       
       ctx.clearRect(0, 0, width, height);
       
-      // Draw flowing wave lines
-      const numLines = 60;
+      // Draw flowing wave lines in Renaissance gold/burgundy tones
+      const numLines = 50;
       const lineSpacing = height / numLines;
       
       for (let i = 0; i < numLines; i++) {
         ctx.beginPath();
         
         const baseY = i * lineSpacing;
-        const hue = 260 + (i / numLines) * 40; // Purple to pink gradient
-        const alpha = 0.15 + (Math.sin(i * 0.1 + time * 0.5) * 0.1);
+        // Alternate between gold (42°) and burgundy (350°) hues
+        const isGold = i % 3 === 0;
+        const hue = isGold ? 42 : 350;
+        const saturation = isGold ? 55 : 35;
+        const lightness = isGold ? 55 : 35;
+        const alpha = 0.12 + (Math.sin(i * 0.15 + time * 0.4) * 0.06);
         
-        ctx.strokeStyle = `hsla(${hue}, 70%, 60%, ${alpha})`;
+        ctx.strokeStyle = `hsla(${hue}, ${saturation}%, ${lightness}%, ${alpha})`;
         ctx.lineWidth = 1;
         
         for (let x = 0; x <= width; x += 3) {
-          const wave1 = Math.sin(x * 0.008 + time * 0.8 + i * 0.1) * 25;
-          const wave2 = Math.sin(x * 0.012 + time * 0.5 - i * 0.05) * 15;
-          const wave3 = Math.sin(x * 0.004 + time * 0.3) * 35;
+          const wave1 = Math.sin(x * 0.006 + time * 0.6 + i * 0.08) * 20;
+          const wave2 = Math.sin(x * 0.01 + time * 0.4 - i * 0.04) * 12;
+          const wave3 = Math.sin(x * 0.003 + time * 0.25) * 30;
           
           const y = baseY + wave1 + wave2 + wave3;
           
@@ -63,7 +67,7 @@ export function QuantumField({ className = '' }: QuantumFieldProps) {
         ctx.stroke();
       }
       
-      time += 0.015;
+      time += 0.012;
       animationId = requestAnimationFrame(drawWaves);
     };
     
@@ -79,7 +83,9 @@ export function QuantumField({ className = '' }: QuantumFieldProps) {
     <canvas
       ref={canvasRef}
       className={`absolute inset-0 w-full h-full ${className}`}
-      style={{ background: 'linear-gradient(135deg, hsl(250, 50%, 12%) 0%, hsl(280, 40%, 15%) 50%, hsl(260, 45%, 10%) 100%)' }}
+      style={{ 
+        background: 'linear-gradient(180deg, hsl(25 25% 10%) 0%, hsl(25 22% 14%) 50%, hsl(25 20% 12%) 100%)' 
+      }}
     />
   );
 }

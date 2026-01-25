@@ -18,19 +18,13 @@ export default function ReadingStreamPage() {
         
         {/* Header overlay */}
         <header className="relative z-20 pt-16 pb-8 text-center">
-          <h1 
-            className="font-display text-4xl md:text-5xl lg:text-6xl font-light mb-4"
-            style={{ color: 'hsl(200, 80%, 90%)' }}
-          >
+          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-primary-foreground mb-4">
             Reading Stream
           </h1>
-          <p 
-            className="font-body text-lg max-w-xl mx-auto px-6"
-            style={{ color: 'hsla(220, 60%, 80%, 0.8)' }}
-          >
+          <p className="font-body text-lg max-w-xl mx-auto px-6 text-primary-foreground/80">
             A curated collection of books, essays, and ideas that have shaped my thinking.
             <br />
-            <span className="text-sm italic">Hover over an orb to explore.</span>
+            <span className="text-sm italic text-accent">Hover over an orb to explore.</span>
           </p>
         </header>
 
@@ -41,10 +35,7 @@ export default function ReadingStreamPage() {
         >
           {isLoading ? (
             <div className="absolute inset-0 flex items-center justify-center">
-              <Loader2 
-                className="h-12 w-12 animate-spin" 
-                style={{ color: 'hsl(220, 70%, 70%)' }}
-              />
+              <Loader2 className="h-12 w-12 animate-spin text-accent" />
             </div>
           ) : items && items.length > 0 ? (
             <div className="relative w-full h-full">
@@ -59,14 +50,8 @@ export default function ReadingStreamPage() {
             </div>
           ) : (
             <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <BookOpen 
-                className="h-16 w-16 mb-4" 
-                style={{ color: 'hsla(220, 60%, 70%, 0.5)' }}
-              />
-              <p 
-                className="font-body text-lg"
-                style={{ color: 'hsla(220, 60%, 80%, 0.7)' }}
-              >
+              <BookOpen className="h-16 w-16 mb-4 text-accent/50" />
+              <p className="font-body text-lg text-primary-foreground/70">
                 Reading recommendations coming soon.
               </p>
             </div>

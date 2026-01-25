@@ -45,7 +45,7 @@ export function Header() {
                   'font-body text-sm uppercase tracking-widest transition-colors',
                   isActive(link.href)
                     ? 'text-primary'
-                    : 'text-muted-foreground hover:text-foreground'
+                    : 'text-muted-foreground hover:text-[#1a2744]'
                 )}
               >
                 {link.label}
@@ -91,7 +91,7 @@ export function Header() {
                     'font-body text-sm uppercase tracking-widest py-2 transition-colors',
                     isActive(link.href)
                       ? 'text-primary'
-                      : 'text-muted-foreground hover:text-foreground'
+                      : 'text-muted-foreground hover:text-[#1a2744]'
                   )}
                 >
                   {link.label}

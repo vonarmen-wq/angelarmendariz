@@ -12,10 +12,8 @@ export function ReadingOrb({ item, index, totalItems }: ReadingOrbProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const animationRef = useRef<number>();
-  const velocityRef = useRef({ x: 0, y: 0 });
-  const targetRef = useRef({ x: 0, y: 0 });
   
-  // Brownian motion - synced with background lattice pace
+  // Wave-based motion synced with background lattice pace
   useEffect(() => {
     let time = Math.random() * 100; // Random start phase
     

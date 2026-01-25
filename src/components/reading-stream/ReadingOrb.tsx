@@ -108,9 +108,9 @@ export function ReadingOrb({ item, index, totalItems }: ReadingOrbProps) {
       />
       
       {/* Orb content - visible on hover */}
-      <div 
-        className={`absolute inset-0 flex flex-col items-center justify-center p-4 text-center transition-all duration-500 ${
-          isHovered ? 'opacity-100' : 'opacity-0'
+      <div
+        className={`absolute inset-0 z-10 flex flex-col items-center justify-center p-4 text-center transition-all duration-500 ${
+          isHovered ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
         <h3 
@@ -150,8 +150,8 @@ export function ReadingOrb({ item, index, totalItems }: ReadingOrbProps) {
       
       {/* Mini label when not hovered */}
       <div 
-        className={`absolute inset-0 flex items-center justify-center p-2 transition-all duration-300 ${
-          isHovered ? 'opacity-0 scale-90' : 'opacity-100 scale-100'
+        className={`absolute inset-0 z-0 flex items-center justify-center p-2 transition-all duration-300 ${
+          isHovered ? 'opacity-0 scale-90 pointer-events-none' : 'opacity-100 scale-100 pointer-events-auto'
         }`}
       >
         <span 

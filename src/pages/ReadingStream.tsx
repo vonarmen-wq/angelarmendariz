@@ -9,7 +9,7 @@ export default function ReadingStreamPage() {
 
   return (
     <Layout
-      title="Reading Stream"
+      title="Thinking Machines"
       description="A curated collection of books, essays, and ideas that have shaped my thinking."
     >
       <div className="min-h-screen relative overflow-hidden">
@@ -19,7 +19,7 @@ export default function ReadingStreamPage() {
         {/* Header overlay */}
         <header className="relative z-20 pt-16 pb-8 text-center">
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-primary-foreground mb-4">
-            Reading Stream
+            Thinking Machines
           </h1>
           <p className="font-body text-lg max-w-xl mx-auto px-6 text-primary-foreground/80">
             A curated collection of books, essays, and ideas that have shaped my thinking.

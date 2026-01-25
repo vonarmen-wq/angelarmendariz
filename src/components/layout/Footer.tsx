@@ -30,7 +30,7 @@ export function Footer() {
                 Essays
               </Link>
               <Link to="/reading-stream" className="font-body text-sm text-foreground hover:text-primary transition-colors">
-                Reading Stream
+                Thinking Machines
               </Link>
               <Link to="/about" className="font-body text-sm text-foreground hover:text-primary transition-colors">
                 About

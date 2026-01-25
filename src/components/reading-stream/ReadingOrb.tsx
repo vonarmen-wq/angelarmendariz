@@ -85,7 +85,7 @@ export function ReadingOrb({ item, index, totalItems }: ReadingOrbProps) {
     >
       {/* Orb with Renaissance aesthetic */}
       <div
-        className="absolute inset-0 rounded-full transition-all duration-500"
+        className="absolute inset-0 rounded-full transition-all duration-500 pointer-events-none"
         style={{
           background: isGoldOrb
             ? `radial-gradient(circle at 30% 30%, 

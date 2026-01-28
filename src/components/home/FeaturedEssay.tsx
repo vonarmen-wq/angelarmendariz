@@ -69,8 +69,8 @@ export function FeaturedEssay() {
                       }}
                     />
                     
-                    {/* Inner window - the "mat" where the photo sits */}
-                    <div className="absolute inset-[9%] overflow-hidden bg-card ring-1 ring-border/30 z-10">
+                    {/* Inner window - transparent opening where the photo sits */}
+                    <div className="absolute inset-[9%] overflow-hidden z-10">
                       {/* Photo - fully opaque, fills the window */}
                       <img
                         src={essay.featured_image}

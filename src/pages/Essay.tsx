@@ -7,58 +7,7 @@ import { ArticleSchema } from '@/components/seo/SEOHead';
 import { Button } from '@/components/ui/button';
 import { format } from 'date-fns';
 import { SubstackCTA } from '@/components/home/SubstackCTA';
-
-// Simple markdown-like rendering
-function renderContent(content: string) {
-  if (!content) return null;
-  
-  // Split into paragraphs
-  const paragraphs = content.split(/\n\n+/);
-  
-  return paragraphs.map((para, i) => {
-    const trimmed = para.trim();
-    if (!trimmed) return null;
-    
-    // Check for headers
-    if (trimmed.startsWith('### ')) {
-      return (
-        <h3 key={i} className="font-display text-xl md:text-2xl font-semibold text-foreground mt-8 mb-4">
-          {trimmed.slice(4)}
-        </h3>
-      );
-    }
-    if (trimmed.startsWith('## ')) {
-      return (
-        <h2 key={i} className="font-display text-2xl md:text-3xl font-semibold text-foreground mt-10 mb-4">
-          {trimmed.slice(3)}
-        </h2>
-      );
-    }
-    if (trimmed.startsWith('# ')) {
-      return (
-        <h1 key={i} className="font-display text-3xl md:text-4xl font-semibold text-foreground mt-12 mb-6">
-          {trimmed.slice(2)}
-        </h1>
-      );
-    }
-    
-    // Check for blockquotes
-    if (trimmed.startsWith('> ')) {
-      return (
-        <blockquote key={i} className="border-l-3 border-accent pl-6 my-6 font-accent text-lg italic text-muted-foreground">
-          {trimmed.slice(2)}
-        </blockquote>
-      );
-    }
-    
-    // Regular paragraph
-    return (
-      <p key={i} className="font-body text-lg leading-relaxed text-foreground mb-6">
-        {trimmed}
-      </p>
-    );
-  });
-}
+import ReactMarkdown from 'react-markdown';
 
 function calculateReadingTime(content: string): number {
   const wordsPerMinute = 200;
@@ -190,7 +139,61 @@ export default function EssayPage() {
 
           {/* Content */}
           <div className="max-w-3xl mx-auto prose-renaissance">
-            {renderContent(essay.content)}
+            <ReactMarkdown
+              components={{
+                h1: ({ children }) => (
+                  <h1 className="font-display text-3xl md:text-4xl font-semibold text-foreground mt-12 mb-6">
+                    {children}
+                  </h1>
+                ),
+                h2: ({ children }) => (
+                  <h2 className="font-display text-2xl md:text-3xl font-semibold text-foreground mt-10 mb-4">
+                    {children}
+                  </h2>
+                ),
+                h3: ({ children }) => (
+                  <h3 className="font-display text-xl md:text-2xl font-semibold text-foreground mt-8 mb-4">
+                    {children}
+                  </h3>
+                ),
+                p: ({ children }) => (
+                  <p className="font-body text-lg leading-relaxed text-foreground mb-6">
+                    {children}
+                  </p>
+                ),
+                blockquote: ({ children }) => (
+                  <blockquote className="border-l-3 border-accent pl-6 my-6 font-accent text-lg italic text-muted-foreground">
+                    {children}
+                  </blockquote>
+                ),
+                ul: ({ children }) => (
+                  <ul className="list-disc list-inside font-body text-lg leading-relaxed text-foreground mb-6 space-y-2">
+                    {children}
+                  </ul>
+                ),
+                ol: ({ children }) => (
+                  <ol className="list-decimal list-inside font-body text-lg leading-relaxed text-foreground mb-6 space-y-2">
+                    {children}
+                  </ol>
+                ),
+                li: ({ children }) => (
+                  <li className="text-foreground">{children}</li>
+                ),
+                strong: ({ children }) => (
+                  <strong className="font-semibold">{children}</strong>
+                ),
+                em: ({ children }) => (
+                  <em className="italic">{children}</em>
+                ),
+                a: ({ href, children }) => (
+                  <a href={href} className="text-primary underline hover:text-primary/80 transition-colors" target="_blank" rel="noopener noreferrer">
+                    {children}
+                  </a>
+                ),
+              }}
+            >
+              {essay.content}
+            </ReactMarkdown>
           </div>
 
           {/* Share */}

@@ -55,21 +55,24 @@ export function FeaturedEssay() {
             {essay.featured_image && (
               <Link to={`/essays/${essay.slug}`} className="block mb-8">
                 <div className="relative max-w-2xl mx-auto">
-                  {/* Baroque frame as border */}
-                  <div 
-                    className="relative opacity-50"
-                    style={{
-                      backgroundImage: `url(${baroqueFrame})`,
-                      backgroundSize: '100% 100%',
-                      backgroundRepeat: 'no-repeat',
-                      padding: '8%',
-                    }}
-                  >
-                    <img
-                      src={essay.featured_image}
-                      alt={essay.title}
-                      className="w-full h-auto max-h-[400px] object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  {/* Frame surrounds image (frame fades, image stays fully opaque) */}
+                  <div className="relative" style={{ padding: '8%' }}>
+                    <div
+                      aria-hidden="true"
+                      className="absolute inset-0 pointer-events-none opacity-50"
+                      style={{
+                        backgroundImage: `url(${baroqueFrame})`,
+                        backgroundSize: '100% 100%',
+                        backgroundRepeat: 'no-repeat',
+                      }}
                     />
+                    <div className="relative">
+                      <img
+                        src={essay.featured_image}
+                        alt={essay.title}
+                        className="w-full h-auto max-h-[400px] object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                      />
+                    </div>
                   </div>
                 </div>
               </Link>

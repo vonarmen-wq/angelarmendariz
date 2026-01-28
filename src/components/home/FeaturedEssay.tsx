@@ -3,14 +3,9 @@ import { ArrowRight, Calendar } from 'lucide-react';
 import { useFeaturedEssay } from '@/hooks/useEssays';
 import { Button } from '@/components/ui/button';
 import { format } from 'date-fns';
-import baroqueFrame from '@/assets/baroque-frame.png';
 
 export function FeaturedEssay() {
   const { data: essay, isLoading } = useFeaturedEssay();
-
-  // Tune this to match the actual inner opening of the frame PNG.
-  // Larger value => smaller visible photo (thicker frame around it)
-  const FRAME_INSET = '12%';
 
   if (isLoading) {
     return (
@@ -55,33 +50,23 @@ export function FeaturedEssay() {
 
           {/* Essay Card */}
           <article className="group">
-            {/* Featured Image with Ornate Frame - Painting Effect */}
+            {/* Featured Image with Renaissance Frame */}
             {essay.featured_image && (
-              <Link to={`/essays/${essay.slug}`} className="block mb-8 overflow-visible">
-                {/* Outer wrapper with generous padding to accommodate frame overflow */}
-                <div className="relative max-w-xl mx-auto overflow-visible" style={{ padding: '15%' }}>
-                  {/* Photo container - the actual image size */}
-                  <div className="relative w-full aspect-[4/3] overflow-visible">
-                    {/* Photo layer */}
+              <Link to={`/essays/${essay.slug}`} className="block mb-8">
+                <div className="relative">
+                  {/* Outer decorative border */}
+                  <div className="absolute -inset-3 border border-accent/30 rounded-sm" />
+                  {/* Corner ornaments */}
+                  <div className="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-accent/60" />
+                  <div className="absolute -top-1 -right-1 w-4 h-4 border-t-2 border-r-2 border-accent/60" />
+                  <div className="absolute -bottom-1 -left-1 w-4 h-4 border-b-2 border-l-2 border-accent/60" />
+                  <div className="absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-accent/60" />
+                  {/* Inner frame */}
+                  <div className="relative border border-border/50 p-1 bg-card/50">
                     <img
                       src={essay.featured_image}
                       alt={essay.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                    />
-                    
-                    {/* Frame overlay - extends beyond photo to surround it */}
-                    <img
-                      aria-hidden="true"
-                      src={baroqueFrame}
-                      alt=""
-                      className="absolute z-10 pointer-events-none select-none"
-                      style={{
-                        top: '-15%',
-                        left: '-15%',
-                        width: '130%',
-                        height: '130%',
-                      }}
-                      draggable={false}
+                      className="w-full h-auto max-h-[400px] object-cover rounded-sm transition-transform duration-500 group-hover:scale-[1.02]"
                     />
                   </div>
                 </div>
@@ -118,51 +103,6 @@ export function FeaturedEssay() {
                 {essay.title}
               </Link>
             </h2>
-
-            {/* Antique Ornamental Divider with Circular Elements */}
-            <div className="flex items-center justify-center gap-3 mb-8 opacity-40">
-              {/* Left scrollwork */}
-              <div className="flex items-center gap-1">
-                <div className="w-8 h-px bg-gradient-to-r from-transparent to-accent/60" />
-                <div className="w-2 h-2 rounded-full border border-accent/50" />
-                <div className="w-3 h-3 rounded-full border border-accent/60 flex items-center justify-center">
-                  <div className="w-1 h-1 rounded-full bg-accent/40" />
-                </div>
-              </div>
-              
-              {/* Left curved flourish */}
-              <div className="w-12 h-4 relative">
-                <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-accent/30 to-accent/50" />
-                <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-accent/40 rounded-tr-full" />
-              </div>
-              
-              {/* Center medallion */}
-              <div className="relative">
-                <div className="w-6 h-6 rounded-full border-2 border-accent/50 flex items-center justify-center">
-                  <div className="w-3 h-3 rounded-full border border-accent/40 flex items-center justify-center">
-                    <div className="w-1.5 h-1.5 rounded-full bg-accent/30" />
-                  </div>
-                </div>
-                {/* Small accent circles */}
-                <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-accent/30" />
-                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-accent/30" />
-              </div>
-              
-              {/* Right curved flourish */}
-              <div className="w-12 h-4 relative">
-                <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-l from-accent/30 to-accent/50" />
-                <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-accent/40 rounded-tl-full" />
-              </div>
-              
-              {/* Right scrollwork */}
-              <div className="flex items-center gap-1">
-                <div className="w-3 h-3 rounded-full border border-accent/60 flex items-center justify-center">
-                  <div className="w-1 h-1 rounded-full bg-accent/40" />
-                </div>
-                <div className="w-2 h-2 rounded-full border border-accent/50" />
-                <div className="w-8 h-px bg-gradient-to-l from-transparent to-accent/60" />
-              </div>
-            </div>
 
             {/* Excerpt */}
             {essay.excerpt && (

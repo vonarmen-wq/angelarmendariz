@@ -57,9 +57,9 @@ export function FeaturedEssay() {
           <article className="group">
             {/* Featured Image with Ornate Frame - Painting Effect */}
             {essay.featured_image && (
-              <Link to={`/essays/${essay.slug}`} className="block mb-8">
-                {/* Outer wrapper with padding to accommodate frame overflow */}
-                <div className="relative max-w-2xl mx-auto px-8 py-8">
+              <Link to={`/essays/${essay.slug}`} className="block mb-8 overflow-visible">
+                {/* Outer wrapper with generous padding to accommodate frame overflow */}
+                <div className="relative max-w-xl mx-auto overflow-visible" style={{ padding: '15%' }}>
                   {/* Photo container - the actual image size */}
                   <div className="relative w-full aspect-[4/3] overflow-visible">
                     {/* Photo layer */}
@@ -76,9 +76,10 @@ export function FeaturedEssay() {
                       alt=""
                       className="absolute z-10 pointer-events-none select-none"
                       style={{
-                        inset: '-12%',
-                        width: '124%',
-                        height: '124%',
+                        top: '-15%',
+                        left: '-15%',
+                        width: '130%',
+                        height: '130%',
                       }}
                       draggable={false}
                     />

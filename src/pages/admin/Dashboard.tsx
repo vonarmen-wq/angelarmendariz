@@ -15,7 +15,8 @@ import {
   Plus,
   Edit,
   Eye,
-  EyeOff 
+  EyeOff,
+  BarChart3
 } from 'lucide-react';
 
 export default function AdminDashboard() {
@@ -111,7 +112,6 @@ export default function AdminDashboard() {
           ))}
         </div>
 
-        {/* Quick Actions */}
         <div className="mb-12">
           <h2 className="font-display text-xl font-semibold text-foreground mb-4">
             Quick Actions
@@ -121,6 +121,12 @@ export default function AdminDashboard() {
               <Link to="/admin/essays/new">
                 <Plus className="h-4 w-4 mr-2" />
                 New Essay
+              </Link>
+            </Button>
+            <Button variant="outline" asChild>
+              <Link to="/admin/analytics">
+                <BarChart3 className="h-4 w-4 mr-2" />
+                Analytics
               </Link>
             </Button>
             <Button variant="outline" asChild>

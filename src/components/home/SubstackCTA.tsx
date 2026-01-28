@@ -21,7 +21,7 @@ export function SubstackCTA() {
           </h2>
 
           <p className="font-body text-lg text-primary-foreground/80 max-w-xl mx-auto">
-            Get essays on technology, strategy, and building delivered directly to your inbox.
+            Get essays on technology, strategy, sales, and random topics, by subscribing to my Substack: Loaded and Layered.
           </p>
 
           <Button

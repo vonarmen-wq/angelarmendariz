@@ -50,15 +50,84 @@ export function FeaturedEssay() {
 
           {/* Essay Card */}
           <article className="group">
-            {/* Featured Image */}
+            {/* Featured Image with Ornate Frame */}
             {essay.featured_image && (
               <Link to={`/essays/${essay.slug}`} className="block mb-8">
-                <div className="relative max-w-2xl mx-auto overflow-hidden rounded-sm">
-                  <img
-                    src={essay.featured_image}
-                    alt={essay.title}
-                    className="w-full h-auto max-h-[450px] object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                  />
+                <div className="relative max-w-2xl mx-auto">
+                  {/* Ornate Frame Container */}
+                  <div className="relative p-6">
+                    {/* Frame Border - faded antique look */}
+                    <div className="absolute inset-0 border-2 border-accent/30 rounded-sm opacity-60" />
+                    
+                    {/* Corner Ornaments - Top Left */}
+                    <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 opacity-40">
+                      <div className="w-6 h-6 rounded-full border-2 border-accent/50 flex items-center justify-center">
+                        <div className="w-2.5 h-2.5 rounded-full border border-accent/40" />
+                      </div>
+                    </div>
+                    
+                    {/* Corner Ornaments - Top Right */}
+                    <div className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 opacity-40">
+                      <div className="w-6 h-6 rounded-full border-2 border-accent/50 flex items-center justify-center">
+                        <div className="w-2.5 h-2.5 rounded-full border border-accent/40" />
+                      </div>
+                    </div>
+                    
+                    {/* Corner Ornaments - Bottom Left */}
+                    <div className="absolute bottom-0 left-0 -translate-x-1/2 translate-y-1/2 opacity-40">
+                      <div className="w-6 h-6 rounded-full border-2 border-accent/50 flex items-center justify-center">
+                        <div className="w-2.5 h-2.5 rounded-full border border-accent/40" />
+                      </div>
+                    </div>
+                    
+                    {/* Corner Ornaments - Bottom Right */}
+                    <div className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 opacity-40">
+                      <div className="w-6 h-6 rounded-full border-2 border-accent/50 flex items-center justify-center">
+                        <div className="w-2.5 h-2.5 rounded-full border border-accent/40" />
+                      </div>
+                    </div>
+                    
+                    {/* Top Center Medallion */}
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-40">
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-px bg-gradient-to-r from-transparent to-accent/50" />
+                        <div className="w-4 h-4 rounded-full border border-accent/40 flex items-center justify-center">
+                          <div className="w-1.5 h-1.5 rounded-full bg-accent/30" />
+                        </div>
+                        <div className="w-8 h-px bg-gradient-to-l from-transparent to-accent/50" />
+                      </div>
+                    </div>
+                    
+                    {/* Bottom Center Medallion */}
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 opacity-40">
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-px bg-gradient-to-r from-transparent to-accent/50" />
+                        <div className="w-4 h-4 rounded-full border border-accent/40 flex items-center justify-center">
+                          <div className="w-1.5 h-1.5 rounded-full bg-accent/30" />
+                        </div>
+                        <div className="w-8 h-px bg-gradient-to-l from-transparent to-accent/50" />
+                      </div>
+                    </div>
+                    
+                    {/* Left Side Ornament */}
+                    <div className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-40">
+                      <div className="w-3 h-3 rounded-full border border-accent/40" />
+                    </div>
+                    
+                    {/* Right Side Ornament */}
+                    <div className="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 opacity-40">
+                      <div className="w-3 h-3 rounded-full border border-accent/40" />
+                    </div>
+                    
+                    {/* The Image */}
+                    <div className="relative overflow-hidden rounded-sm">
+                      <img
+                        src={essay.featured_image}
+                        alt={essay.title}
+                        className="w-full h-auto max-h-[450px] object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                      />
+                    </div>
+                  </div>
                 </div>
               </Link>
             )}

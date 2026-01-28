@@ -37,7 +37,7 @@ export function FeaturedEssay() {
   }
 
   return (
-    <section className="py-20 md:py-32 bg-card/50">
+    <section className="pt-20 md:pt-32 pb-10 md:pb-16 bg-card/50">
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto">
           {/* Section Label */}

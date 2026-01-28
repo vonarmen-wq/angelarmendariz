@@ -260,16 +260,28 @@ export default function EssayEditor() {
                 id="content"
                 value={essay.content || ''}
                 onChange={(e) => setEssay((prev) => ({ ...prev, content: e.target.value }))}
-                placeholder="Write your essay here... Use markdown-style formatting:
-# Heading 1
-## Heading 2
-### Heading 3
-> Blockquote
-
-Paragraphs are separated by blank lines."
+                placeholder="Write your essay here using markdown formatting..."
                 rows={20}
                 className="font-body"
               />
+              
+              {/* Markdown Help */}
+              <div className="rounded-lg border border-border bg-muted/30 p-4 space-y-3">
+                <p className="font-body text-sm font-medium text-foreground">Markdown Formatting Guide</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-muted-foreground font-body">
+                  <div className="space-y-2">
+                    <p><code className="bg-muted px-1.5 py-0.5 rounded text-xs">[link text](https://url.com)</code> → clickable link</p>
+                    <p><code className="bg-muted px-1.5 py-0.5 rounded text-xs">**bold text**</code> → <strong>bold text</strong></p>
+                    <p><code className="bg-muted px-1.5 py-0.5 rounded text-xs">*italic text*</code> → <em>italic text</em></p>
+                  </div>
+                  <div className="space-y-2">
+                    <p><code className="bg-muted px-1.5 py-0.5 rounded text-xs"># Heading 1</code> (use ## for H2, ### for H3)</p>
+                    <p><code className="bg-muted px-1.5 py-0.5 rounded text-xs">&gt; quote text</code> → blockquote</p>
+                    <p><code className="bg-muted px-1.5 py-0.5 rounded text-xs">- item</code> or <code className="bg-muted px-1.5 py-0.5 rounded text-xs">1. item</code> → lists</p>
+                  </div>
+                </div>
+                <p className="text-xs text-muted-foreground/70">Tip: Leave a blank line between paragraphs. Add a space after # for headings.</p>
+              </div>
             </div>
 
             {/* Featured Image URL */}

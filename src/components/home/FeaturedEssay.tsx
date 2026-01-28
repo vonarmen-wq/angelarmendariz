@@ -56,11 +56,20 @@ export function FeaturedEssay() {
               <Link to={`/essays/${essay.slug}`} className="block mb-8">
                 <div className="relative max-w-2xl mx-auto">
                   {/* Frame Shell - controls aspect ratio and contains all layers */}
-                  <div className="relative w-full aspect-[4/3] shadow-lg">
-                    {/* Frame background layer - faded frame, behind photo */}
+                  <div className="relative w-full aspect-[4/3]">
+                    {/* Photo layer - sits behind the frame */}
+                    <div className="absolute inset-[8%] overflow-hidden">
+                      <img
+                        src={essay.featured_image}
+                        alt={essay.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                      />
+                    </div>
+                    
+                    {/* Frame overlay - on top of photo, ornate border visible */}
                     <div
                       aria-hidden="true"
-                      className="absolute inset-0 pointer-events-none opacity-50 z-0"
+                      className="absolute inset-0 pointer-events-none z-10"
                       style={{
                         backgroundImage: `url(${baroqueFrame})`,
                         backgroundSize: '100% 100%',
@@ -68,16 +77,6 @@ export function FeaturedEssay() {
                         backgroundPosition: 'center',
                       }}
                     />
-                    
-                    {/* Inner window - transparent opening where the photo sits */}
-                    <div className="absolute inset-[9%] overflow-hidden z-10">
-                      {/* Photo - fully opaque, fills the window */}
-                      <img
-                        src={essay.featured_image}
-                        alt={essay.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                      />
-                    </div>
                   </div>
                 </div>
               </Link>

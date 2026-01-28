@@ -53,20 +53,35 @@ export function FeaturedEssay() {
             {/* Featured Image with Renaissance Frame */}
             {essay.featured_image && (
               <Link to={`/essays/${essay.slug}`} className="block mb-8">
-                <div className="relative">
+                <div className="relative p-6">
                   {/* Outer decorative border */}
-                  <div className="absolute -inset-3 border border-accent/30 rounded-sm" />
-                  {/* Corner ornaments */}
-                  <div className="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-accent/60" />
-                  <div className="absolute -top-1 -right-1 w-4 h-4 border-t-2 border-r-2 border-accent/60" />
-                  <div className="absolute -bottom-1 -left-1 w-4 h-4 border-b-2 border-l-2 border-accent/60" />
-                  <div className="absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-accent/60" />
-                  {/* Inner frame */}
-                  <div className="relative border border-border/50 p-1 bg-card/50">
+                  <div className="absolute inset-0 border border-accent/20 rounded-sm" />
+                  <div className="absolute inset-2 border border-accent/30" />
+                  
+                  {/* Corner ornaments - outer */}
+                  <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-accent/50" />
+                  <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-accent/50" />
+                  <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-accent/50" />
+                  <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-accent/50" />
+                  
+                  {/* Corner ornaments - inner diamonds */}
+                  <div className="absolute top-3 left-3 w-2 h-2 rotate-45 bg-accent/40" />
+                  <div className="absolute top-3 right-3 w-2 h-2 rotate-45 bg-accent/40" />
+                  <div className="absolute bottom-3 left-3 w-2 h-2 rotate-45 bg-accent/40" />
+                  <div className="absolute bottom-3 right-3 w-2 h-2 rotate-45 bg-accent/40" />
+                  
+                  {/* Side flourishes */}
+                  <div className="absolute top-1/2 left-0 -translate-y-1/2 w-1.5 h-12 bg-gradient-to-b from-transparent via-accent/30 to-transparent" />
+                  <div className="absolute top-1/2 right-0 -translate-y-1/2 w-1.5 h-12 bg-gradient-to-b from-transparent via-accent/30 to-transparent" />
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-1.5 bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-1.5 bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
+                  
+                  {/* Inner frame with image */}
+                  <div className="relative border border-border/50 bg-card/30 p-1.5 shadow-sm">
                     <img
                       src={essay.featured_image}
                       alt={essay.title}
-                      className="w-full h-auto max-h-[400px] object-cover rounded-sm transition-transform duration-500 group-hover:scale-[1.02]"
+                      className="w-full h-auto max-h-[400px] object-cover transition-transform duration-500 group-hover:scale-[1.01]"
                     />
                   </div>
                 </div>

@@ -51,26 +51,31 @@ export function FeaturedEssay() {
 
           {/* Essay Card */}
           <article className="group">
-            {/* Featured Image with Ornate Frame */}
+            {/* Featured Image with Ornate Frame - Painting Effect */}
             {essay.featured_image && (
               <Link to={`/essays/${essay.slug}`} className="block mb-8">
                 <div className="relative max-w-2xl mx-auto">
-                  {/* Frame surrounds image (frame fades, image stays fully opaque) */}
-                  <div className="relative" style={{ padding: '8%' }}>
+                  {/* Frame Shell - controls aspect ratio and contains all layers */}
+                  <div className="relative w-full aspect-[4/3] shadow-lg">
+                    {/* Frame background layer - faded frame, behind photo */}
                     <div
                       aria-hidden="true"
-                      className="absolute inset-0 pointer-events-none opacity-50"
+                      className="absolute inset-0 pointer-events-none opacity-50 z-0"
                       style={{
                         backgroundImage: `url(${baroqueFrame})`,
                         backgroundSize: '100% 100%',
                         backgroundRepeat: 'no-repeat',
+                        backgroundPosition: 'center',
                       }}
                     />
-                    <div className="relative">
+                    
+                    {/* Inner window - the "mat" where the photo sits */}
+                    <div className="absolute inset-[9%] overflow-hidden bg-card ring-1 ring-border/30 z-10">
+                      {/* Photo - fully opaque, fills the window */}
                       <img
                         src={essay.featured_image}
                         alt={essay.title}
-                        className="w-full h-auto max-h-[400px] object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                       />
                     </div>
                   </div>

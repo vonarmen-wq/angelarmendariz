@@ -8,6 +8,10 @@ import baroqueFrame from '@/assets/baroque-frame.png';
 export function FeaturedEssay() {
   const { data: essay, isLoading } = useFeaturedEssay();
 
+  // Tune this to match the actual inner opening of the frame PNG.
+  // Larger value => smaller visible photo (thicker frame around it)
+  const FRAME_INSET = '12%';
+
   if (isLoading) {
     return (
       <section className="py-20 md:py-32 bg-card/50">
@@ -57,8 +61,8 @@ export function FeaturedEssay() {
                 <div className="relative max-w-2xl mx-auto">
                   {/* Frame Shell - controls aspect ratio and contains all layers */}
                   <div className="relative w-full aspect-[4/3]">
-                    {/* Photo layer - sits behind the frame */}
-                    <div className="absolute inset-[8%] overflow-hidden">
+                    {/* Photo layer - sits behind the frame (inside its opening) */}
+                    <div className="absolute overflow-hidden" style={{ inset: FRAME_INSET }}>
                       <img
                         src={essay.featured_image}
                         alt={essay.title}
@@ -67,15 +71,12 @@ export function FeaturedEssay() {
                     </div>
                     
                     {/* Frame overlay - on top of photo, ornate border visible */}
-                    <div
+                    <img
                       aria-hidden="true"
-                      className="absolute inset-0 pointer-events-none z-10"
-                      style={{
-                        backgroundImage: `url(${baroqueFrame})`,
-                        backgroundSize: '100% 100%',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundPosition: 'center',
-                      }}
+                      src={baroqueFrame}
+                      alt=""
+                      className="absolute inset-0 z-10 pointer-events-none select-none w-full h-full object-fill"
+                      draggable={false}
                     />
                   </div>
                 </div>

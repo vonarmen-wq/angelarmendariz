@@ -58,24 +58,28 @@ export function FeaturedEssay() {
             {/* Featured Image with Ornate Frame - Painting Effect */}
             {essay.featured_image && (
               <Link to={`/essays/${essay.slug}`} className="block mb-8">
-                <div className="relative max-w-2xl mx-auto">
-                  {/* Frame Shell - controls aspect ratio and contains all layers */}
-                  <div className="relative w-full aspect-[4/3]">
-                    {/* Photo layer - sits behind the frame (inside its opening) */}
-                    <div className="absolute overflow-hidden" style={{ inset: FRAME_INSET }}>
-                      <img
-                        src={essay.featured_image}
-                        alt={essay.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                      />
-                    </div>
+                {/* Outer wrapper with padding to accommodate frame overflow */}
+                <div className="relative max-w-2xl mx-auto px-8 py-8">
+                  {/* Photo container - the actual image size */}
+                  <div className="relative w-full aspect-[4/3] overflow-visible">
+                    {/* Photo layer */}
+                    <img
+                      src={essay.featured_image}
+                      alt={essay.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                    />
                     
-                    {/* Frame overlay - on top of photo, ornate border visible */}
+                    {/* Frame overlay - extends beyond photo to surround it */}
                     <img
                       aria-hidden="true"
                       src={baroqueFrame}
                       alt=""
-                      className="absolute inset-0 z-10 pointer-events-none select-none w-full h-full object-fill"
+                      className="absolute z-10 pointer-events-none select-none"
+                      style={{
+                        inset: '-12%',
+                        width: '124%',
+                        height: '124%',
+                      }}
                       draggable={false}
                     />
                   </div>

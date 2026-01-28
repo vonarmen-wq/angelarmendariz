@@ -3,7 +3,6 @@ import { ArrowRight, Calendar } from 'lucide-react';
 import { useFeaturedEssay } from '@/hooks/useEssays';
 import { Button } from '@/components/ui/button';
 import { format } from 'date-fns';
-import ornateFrame from '@/assets/ornate-frame.png';
 
 export function FeaturedEssay() {
   const { data: essay, isLoading } = useFeaturedEssay();
@@ -51,24 +50,95 @@ export function FeaturedEssay() {
 
           {/* Essay Card */}
           <article className="group">
-            {/* Featured Image with Renaissance Frame */}
+            {/* Featured Image with Baroque-inspired CSS Frame */}
             {essay.featured_image && (
               <Link to={`/essays/${essay.slug}`} className="block mb-8">
                 <div className="relative max-w-2xl mx-auto">
-                  {/* Ornate frame overlay */}
-                  <img
-                    src={ornateFrame}
-                    alt=""
-                    className="absolute inset-0 w-full h-full object-fill pointer-events-none z-10"
-                    aria-hidden="true"
-                  />
-                  {/* Featured image inside frame */}
-                  <div className="p-[8%]">
-                    <img
-                      src={essay.featured_image}
-                      alt={essay.title}
-                      className="w-full h-auto aspect-[3/4] object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  {/* Baroque frame structure */}
+                  <div className="relative p-5 md:p-7">
+                    {/* Main frame background with carved effect */}
+                    <div 
+                      className="absolute inset-0"
+                      style={{
+                        background: 'linear-gradient(145deg, hsl(35 30% 35%) 0%, hsl(25 25% 25%) 50%, hsl(35 30% 30%) 100%)',
+                        boxShadow: '0 8px 32px hsl(var(--foreground)/0.2), inset 0 2px 4px hsl(40 30% 50%/0.3), inset 0 -2px 4px hsl(20 20% 15%/0.5)'
+                      }}
                     />
+                    
+                    {/* Inner carved border */}
+                    <div 
+                      className="absolute inset-2 md:inset-3"
+                      style={{
+                        border: '3px solid hsl(35 35% 40%)',
+                        boxShadow: 'inset 0 1px 2px hsl(40 30% 55%/0.4), inset 0 -1px 2px hsl(20 20% 15%/0.4)'
+                      }}
+                    />
+                    
+                    {/* Innermost border detail */}
+                    <div 
+                      className="absolute inset-3 md:inset-4"
+                      style={{
+                        border: '1px solid hsl(35 25% 45%/0.6)'
+                      }}
+                    />
+                    
+                    {/* Top center ornament */}
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center">
+                      <div className="w-6 h-3 rounded-t-full" style={{ background: 'linear-gradient(to bottom, hsl(35 35% 45%), hsl(25 25% 30%))' }} />
+                      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3 h-3 rotate-45" style={{ background: 'linear-gradient(135deg, hsl(40 35% 50%), hsl(30 30% 35%))', boxShadow: '0 2px 4px hsl(0 0% 0%/0.3)' }} />
+                    </div>
+                    
+                    {/* Bottom center ornament */}
+                    <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 flex items-center">
+                      <div className="w-6 h-3 rounded-b-full" style={{ background: 'linear-gradient(to top, hsl(35 35% 45%), hsl(25 25% 30%))' }} />
+                      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3 h-3 rotate-45" style={{ background: 'linear-gradient(135deg, hsl(40 35% 50%), hsl(30 30% 35%))', boxShadow: '0 2px 4px hsl(0 0% 0%/0.3)' }} />
+                    </div>
+                    
+                    {/* Corner flourishes - Top Left */}
+                    <div className="absolute -top-2 -left-2">
+                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-tl-lg" style={{ background: 'linear-gradient(135deg, hsl(40 35% 50%) 0%, hsl(30 30% 35%) 50%, hsl(25 25% 28%) 100%)', boxShadow: '2px 2px 6px hsl(0 0% 0%/0.3)' }} />
+                      <div className="absolute top-1 left-1 w-6 h-6 md:w-8 md:h-8 rounded-tl" style={{ background: 'linear-gradient(135deg, hsl(35 30% 55%), hsl(30 25% 40%))' }} />
+                      {/* Scroll detail */}
+                      <div className="absolute top-3 left-8 md:left-10 w-4 h-1.5 rounded-full" style={{ background: 'linear-gradient(90deg, hsl(35 35% 45%), transparent)' }} />
+                      <div className="absolute top-8 md:top-10 left-3 w-1.5 h-4 rounded-full" style={{ background: 'linear-gradient(180deg, hsl(35 35% 45%), transparent)' }} />
+                    </div>
+                    
+                    {/* Corner flourishes - Top Right */}
+                    <div className="absolute -top-2 -right-2">
+                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-tr-lg" style={{ background: 'linear-gradient(-135deg, hsl(40 35% 50%) 0%, hsl(30 30% 35%) 50%, hsl(25 25% 28%) 100%)', boxShadow: '-2px 2px 6px hsl(0 0% 0%/0.3)' }} />
+                      <div className="absolute top-1 right-1 w-6 h-6 md:w-8 md:h-8 rounded-tr" style={{ background: 'linear-gradient(-135deg, hsl(35 30% 55%), hsl(30 25% 40%))' }} />
+                      <div className="absolute top-3 right-8 md:right-10 w-4 h-1.5 rounded-full" style={{ background: 'linear-gradient(-90deg, hsl(35 35% 45%), transparent)' }} />
+                      <div className="absolute top-8 md:top-10 right-3 w-1.5 h-4 rounded-full" style={{ background: 'linear-gradient(180deg, hsl(35 35% 45%), transparent)' }} />
+                    </div>
+                    
+                    {/* Corner flourishes - Bottom Left */}
+                    <div className="absolute -bottom-2 -left-2">
+                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-bl-lg" style={{ background: 'linear-gradient(45deg, hsl(40 35% 50%) 0%, hsl(30 30% 35%) 50%, hsl(25 25% 28%) 100%)', boxShadow: '2px -2px 6px hsl(0 0% 0%/0.3)' }} />
+                      <div className="absolute bottom-1 left-1 w-6 h-6 md:w-8 md:h-8 rounded-bl" style={{ background: 'linear-gradient(45deg, hsl(35 30% 55%), hsl(30 25% 40%))' }} />
+                      <div className="absolute bottom-3 left-8 md:left-10 w-4 h-1.5 rounded-full" style={{ background: 'linear-gradient(90deg, hsl(35 35% 45%), transparent)' }} />
+                      <div className="absolute bottom-8 md:bottom-10 left-3 w-1.5 h-4 rounded-full" style={{ background: 'linear-gradient(0deg, hsl(35 35% 45%), transparent)' }} />
+                    </div>
+                    
+                    {/* Corner flourishes - Bottom Right */}
+                    <div className="absolute -bottom-2 -right-2">
+                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-br-lg" style={{ background: 'linear-gradient(-45deg, hsl(40 35% 50%) 0%, hsl(30 30% 35%) 50%, hsl(25 25% 28%) 100%)', boxShadow: '-2px -2px 6px hsl(0 0% 0%/0.3)' }} />
+                      <div className="absolute bottom-1 right-1 w-6 h-6 md:w-8 md:h-8 rounded-br" style={{ background: 'linear-gradient(-45deg, hsl(35 30% 55%), hsl(30 25% 40%))' }} />
+                      <div className="absolute bottom-3 right-8 md:right-10 w-4 h-1.5 rounded-full" style={{ background: 'linear-gradient(-90deg, hsl(35 35% 45%), transparent)' }} />
+                      <div className="absolute bottom-8 md:bottom-10 right-3 w-1.5 h-4 rounded-full" style={{ background: 'linear-gradient(0deg, hsl(35 35% 45%), transparent)' }} />
+                    </div>
+                    
+                    {/* Side ornaments */}
+                    <div className="absolute top-1/2 -left-1 -translate-y-1/2 w-2 h-20 rounded-full" style={{ background: 'linear-gradient(to bottom, transparent, hsl(35 35% 45%) 30%, hsl(35 35% 45%) 70%, transparent)' }} />
+                    <div className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-20 rounded-full" style={{ background: 'linear-gradient(to bottom, transparent, hsl(35 35% 45%) 30%, hsl(35 35% 45%) 70%, transparent)' }} />
+                    
+                    {/* Image container */}
+                    <div className="relative" style={{ boxShadow: 'inset 0 2px 8px hsl(0 0% 0%/0.4)' }}>
+                      <img
+                        src={essay.featured_image}
+                        alt={essay.title}
+                        className="w-full h-auto max-h-[450px] object-cover transition-transform duration-500 group-hover:scale-[1.01]"
+                      />
+                    </div>
                   </div>
                 </div>
               </Link>

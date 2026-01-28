@@ -1,5 +1,5 @@
 import { useSiteSettings } from '@/hooks/useSiteSettings';
-import heroVideo from '@/assets/book-emerging.mp4';
+import heroVideo from '@/assets/angelwebsite_cover.mp4';
 
 export function VideoHero() {
   const { data: settings } = useSiteSettings();

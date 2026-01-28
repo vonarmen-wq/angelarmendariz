@@ -15,12 +15,12 @@ export function BioSection() {
           <div className="space-y-8">
             <div className="flex items-center gap-4">
               <span className="font-body text-xs uppercase tracking-[0.2em] text-accent">
-                About
+                Bio
               </span>
               <div className="flex-1 h-px bg-border" />
             </div>
 
-            <p className="font-body text-lg md:text-xl text-foreground leading-relaxed">
+            <p className="font-body text-base md:text-lg text-foreground leading-relaxed">
               {settings?.bio || 'Enterprise technology leader with experience in proptech, fintech, and venture building.'}
             </p>
 

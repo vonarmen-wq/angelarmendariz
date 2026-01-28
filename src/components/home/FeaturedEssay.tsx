@@ -55,14 +55,16 @@ export function FeaturedEssay() {
             {essay.featured_image && (
               <Link to={`/essays/${essay.slug}`} className="block mb-8">
                 <div className="relative max-w-2xl mx-auto">
-                  {/* Frame overlay */}
-                  <img
-                    src={baroqueFrame}
-                    alt=""
-                    className="absolute inset-0 w-full h-full object-fill z-10 pointer-events-none opacity-50"
-                  />
-                  {/* The Image with padding to fit inside frame */}
-                  <div className="p-[10%]">
+                  {/* Baroque frame as border */}
+                  <div 
+                    className="relative opacity-50"
+                    style={{
+                      backgroundImage: `url(${baroqueFrame})`,
+                      backgroundSize: '100% 100%',
+                      backgroundRepeat: 'no-repeat',
+                      padding: '8%',
+                    }}
+                  >
                     <img
                       src={essay.featured_image}
                       alt={essay.title}

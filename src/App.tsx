@@ -13,6 +13,7 @@ import Auth from "./pages/Auth";
 import AdminDashboard from "./pages/admin/Dashboard";
 import EssayEditor from "./pages/admin/EssayEditor";
 import SiteSettings from "./pages/admin/SiteSettings";
+import AdminEssays from "./pages/admin/Essays";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,8 +33,10 @@ const App = () => (
           <Route path="/reading-stream" element={<ReadingStream />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/essays" element={<AdminEssays />} />
           <Route path="/admin/essays/:id" element={<EssayEditor />} />
           <Route path="/admin/settings" element={<SiteSettings />} />
+          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

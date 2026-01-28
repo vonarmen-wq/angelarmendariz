@@ -20,9 +20,16 @@ export function BioSection() {
               <div className="flex-1 h-px bg-border" />
             </div>
 
-            <p className="font-body text-base md:text-lg text-foreground leading-relaxed">
-              {settings?.bio || 'Enterprise technology leader with experience in proptech, fintech, and venture building.'}
-            </p>
+            <div className="space-y-4">
+              {(settings?.bio || 'Enterprise technology leader with experience in proptech, fintech, and venture building.')
+                .split(/\n\n+/)
+                .filter(para => para.trim())
+                .map((paragraph, index) => (
+                  <p key={index} className="font-body text-base md:text-lg text-foreground leading-relaxed">
+                    {paragraph.trim()}
+                  </p>
+                ))}
+            </div>
 
             <div className="flex items-center gap-4">
               {settings?.linkedin_url && (

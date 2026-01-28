@@ -50,6 +50,29 @@ export function FeaturedEssay() {
 
           {/* Essay Card */}
           <article className="group">
+            {/* Featured Image with Renaissance Frame */}
+            {essay.featured_image && (
+              <Link to={`/essays/${essay.slug}`} className="block mb-8">
+                <div className="relative">
+                  {/* Outer decorative border */}
+                  <div className="absolute -inset-3 border border-accent/30 rounded-sm" />
+                  {/* Corner ornaments */}
+                  <div className="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-accent/60" />
+                  <div className="absolute -top-1 -right-1 w-4 h-4 border-t-2 border-r-2 border-accent/60" />
+                  <div className="absolute -bottom-1 -left-1 w-4 h-4 border-b-2 border-l-2 border-accent/60" />
+                  <div className="absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-accent/60" />
+                  {/* Inner frame */}
+                  <div className="relative border border-border/50 p-1 bg-card/50">
+                    <img
+                      src={essay.featured_image}
+                      alt={essay.title}
+                      className="w-full h-auto max-h-[400px] object-cover rounded-sm transition-transform duration-500 group-hover:scale-[1.02]"
+                    />
+                  </div>
+                </div>
+              </Link>
+            )}
+
             {/* Category & Date */}
             <div className="flex items-center gap-4 mb-4 text-sm text-muted-foreground">
               {essay.category && (

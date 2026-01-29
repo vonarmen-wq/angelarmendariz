@@ -12,6 +12,8 @@ import EssayEditor from "@/pages/admin/EssayEditor";
 import SiteSettings from "@/pages/admin/SiteSettings";
 import AdminEssays from "@/pages/admin/Essays";
 import AdminAnalytics from "@/pages/admin/Analytics";
+import AdminProjects from "@/pages/admin/Projects";
+import AdminReadingItems from "@/pages/admin/ReadingItems";
 import NotFound from "@/pages/NotFound";
 
 export const AppRoutes = () => {
@@ -31,6 +33,8 @@ export const AppRoutes = () => {
       <Route path="/admin/essays/:id" element={<EssayEditor />} />
       <Route path="/admin/settings" element={<SiteSettings />} />
       <Route path="/admin/analytics" element={<AdminAnalytics />} />
+      <Route path="/admin/projects" element={<AdminProjects />} />
+      <Route path="/admin/reading-items" element={<AdminReadingItems />} />
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
       <Route path="*" element={<NotFound />} />
     </Routes>

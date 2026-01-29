@@ -124,6 +124,18 @@ export default function AdminDashboard() {
               </Link>
             </Button>
             <Button variant="outline" asChild>
+              <Link to="/admin/projects">
+                <Briefcase className="h-4 w-4 mr-2" />
+                Projects
+              </Link>
+            </Button>
+            <Button variant="outline" asChild>
+              <Link to="/admin/reading-items">
+                <FileText className="h-4 w-4 mr-2" />
+                Thinking Machines
+              </Link>
+            </Button>
+            <Button variant="outline" asChild>
               <Link to="/admin/analytics">
                 <BarChart3 className="h-4 w-4 mr-2" />
                 Analytics

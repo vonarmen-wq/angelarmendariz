@@ -1,5 +1,4 @@
 // Google Analytics 4 tracking utilities
-// Replace G-XXXXXXXXXX with your actual GA4 Measurement ID
 
 declare global {
   interface Window {
@@ -8,7 +7,7 @@ declare global {
   }
 }
 
-export const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
+export const GA_MEASUREMENT_ID = 'G-VVZBBBEF0V';
 
 // Track page views
 export const trackPageView = (url: string, title?: string) => {

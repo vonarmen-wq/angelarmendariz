@@ -30,7 +30,7 @@ export default function AdminAnalytics() {
   const { data: settings } = useSiteSettings();
   const navigate = useNavigate();
 
-  const isGAConfigured = GA_MEASUREMENT_ID !== 'G-XXXXXXXXXX';
+  const isGAConfigured = Boolean(GA_MEASUREMENT_ID && GA_MEASUREMENT_ID.startsWith('G-'));
 
   useEffect(() => {
     if (!authLoading && !user) {

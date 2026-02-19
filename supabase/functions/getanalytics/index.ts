@@ -26,9 +26,8 @@ Deno.serve(async (req) => {
       { global: { headers: { Authorization: authHeader } } }
     )
 
-    const token = authHeader.replace('Bearer ', '')
-    const { data: claimsData, error: claimsError } = await supabase.auth.getClaims(token)
-    if (claimsError || !claimsData?.claims) {
+    const { data: { user }, error: userError } = await supabase.auth.getUser()
+    if (userError || !user) {
       return new Response(JSON.stringify({ error: 'Unauthorized' }), {
         status: 401,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -41,7 +40,7 @@ Deno.serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
     )
 
-    const userId = claimsData.claims.sub
+    const userId = user.id
     const { data: adminData } = await adminClient
       .from('admin_users')
       .select('id')
@@ -77,14 +76,9 @@ Deno.serve(async (req) => {
     }
 
     const allViews = views || []
-
-    // Total page views
     const totalPageViews = allViews.length
+    const uniqueSessions = new Set(allViews.map((v: any) => v.session_id).filter(Boolean)).size
 
-    // Unique sessions
-    const uniqueSessions = new Set(allViews.map(v => v.session_id).filter(Boolean)).size
-
-    // Page views by path
     const pathCounts: Record<string, number> = {}
     for (const v of allViews) {
       pathCounts[v.path] = (pathCounts[v.path] || 0) + 1
@@ -95,7 +89,6 @@ Deno.serve(async (req) => {
       .slice(0, 10)
       .map(([path, views]) => ({ path, views }))
 
-    // Daily views (for chart)
     const dailyViews: Record<string, { views: number; sessions: Set<string> }> = {}
     for (const v of allViews) {
       const day = v.created_at.split('T')[0]
@@ -114,7 +107,6 @@ Deno.serve(async (req) => {
         visitors: data.sessions.size,
       }))
 
-    // Referrer breakdown
     const referrerCounts: Record<string, number> = {}
     for (const v of allViews) {
       let source = 'Direct'
@@ -146,7 +138,6 @@ Deno.serve(async (req) => {
       }))
       .sort((a, b) => b.value - a.value)
 
-    // Essay-specific views
     const essayViews = topPages.filter(p => p.path.startsWith('/essays/'))
 
     const result = {

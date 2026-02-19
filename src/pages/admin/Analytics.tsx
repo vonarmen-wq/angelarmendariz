@@ -190,23 +190,17 @@ export default function AdminAnalytics() {
           </Tabs>
         )}
 
-        {/* Info Card about GA4 API */}
+        {/* Info Card */}
         <Card className="mt-8 bg-muted/30">
           <CardHeader>
             <CardTitle className="text-base">About This Dashboard</CardTitle>
           </CardHeader>
           <CardContent className="font-body text-sm text-muted-foreground space-y-2">
             <p>
-              This dashboard displays sample data to show you what analytics will look like once configured.
-              Real data will appear after:
+              This dashboard shows real data tracked from your site visitors. Data includes page views, unique sessions, traffic sources, and essay performance.
             </p>
-            <ul className="list-disc list-inside ml-2 space-y-1">
-              <li>Your GA4 Measurement ID is configured</li>
-              <li>Visitors start interacting with your site</li>
-              <li>Data is collected (may take 24-48 hours for initial data)</li>
-            </ul>
-            <p className="mt-4">
-              For full analytics capabilities, visit your{' '}
+            <p>
+              For advanced metrics (bounce rate, session duration, demographics), visit your{' '}
               <a 
                 href="https://analytics.google.com" 
                 target="_blank" 
@@ -214,8 +208,7 @@ export default function AdminAnalytics() {
                 className="text-primary hover:underline"
               >
                 Google Analytics Dashboard
-              </a>
-              .
+              </a>.
             </p>
           </CardContent>
         </Card>

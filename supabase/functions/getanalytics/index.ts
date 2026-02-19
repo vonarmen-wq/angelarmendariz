@@ -1,4 +1,4 @@
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.49.1'
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -11,7 +11,6 @@ Deno.serve(async (req) => {
   }
 
   try {
-    // Verify admin
     const authHeader = req.headers.get('Authorization')
     if (!authHeader?.startsWith('Bearer ')) {
       return new Response(JSON.stringify({ error: 'Unauthorized' }), {
@@ -20,11 +19,13 @@ Deno.serve(async (req) => {
       })
     }
 
-    const supabase = createClient(
-      Deno.env.get('SUPABASE_URL')!,
-      Deno.env.get('SUPABASE_ANON_KEY')!,
-      { global: { headers: { Authorization: authHeader } } }
-    )
+    const supabaseUrl = Deno.env.get('SUPABASE_URL')!
+    const supabaseAnonKey = Deno.env.get('SUPABASE_ANON_KEY')!
+    const serviceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
+
+    const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+      global: { headers: { Authorization: authHeader } },
+    })
 
     const { data: { user }, error: userError } = await supabase.auth.getUser()
     if (userError || !user) {
@@ -34,17 +35,12 @@ Deno.serve(async (req) => {
       })
     }
 
-    // Check admin using service role
-    const adminClient = createClient(
-      Deno.env.get('SUPABASE_URL')!,
-      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
-    )
+    const adminClient = createClient(supabaseUrl, serviceRoleKey)
 
-    const userId = user.id
     const { data: adminData } = await adminClient
       .from('admin_users')
       .select('id')
-      .eq('user_id', userId)
+      .eq('user_id', user.id)
       .single()
 
     if (!adminData) {
@@ -60,7 +56,6 @@ Deno.serve(async (req) => {
     since.setDate(since.getDate() - days)
     const sinceISO = since.toISOString()
 
-    // Get all page views in the period
     const { data: views, error: viewsError } = await adminClient
       .from('page_views')
       .select('path, session_id, referrer, created_at')

@@ -19,7 +19,7 @@ export function useAnalyticsData(days = 30) {
 
       const projectId = import.meta.env.VITE_SUPABASE_PROJECT_ID;
       const res = await fetch(
-        `https://${projectId}.supabase.co/functions/v1/get-analytics?days=${days}`,
+        `https://${projectId}.supabase.co/functions/v1/getanalytics?days=${days}`,
         {
           headers: {
             Authorization: `Bearer ${session.access_token}`,

@@ -3,5 +3,5 @@ project_id = "dvhidngjjgdkayrrpjpw"
 [functions.track-pageview]
 verify_jwt = false
 
-[functions.get-analytics]
+[functions.getanalytics]
 verify_jwt = false
